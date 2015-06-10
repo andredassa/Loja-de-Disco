@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LojaDeDisco.Api.Models
 {
-	public class FIlme : Titulo
+	public class Filme : Titulo
 	{
 		public string Sinopse { get; set; }
 		public string Elenco { get; set; }

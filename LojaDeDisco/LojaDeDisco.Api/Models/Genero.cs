@@ -7,10 +7,11 @@ namespace LojaDeDisco.Api.Models
 {
 	public class Genero
 	{
-		public int id { get; set; }
-		public string nome { get; set; }
-		public int GeneroID { get; set; }
+		public int Id { get; set; }
+		public string Nome { get; set; }
+		public int? GeneroPaiId { get; set; }
 		public Genero GeneroPai { get; set; }
 		public List<Titulo> Titulos { get; set; }
+		public List<Genero> Filhos { get; set; }
 	}
 }
