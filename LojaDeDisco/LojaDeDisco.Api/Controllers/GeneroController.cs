@@ -23,6 +23,13 @@ namespace LojaDeDisco.Api.Controllers
             return View(generos.ToList());
         }
 
+		public ActionResult GetFilho(int id)
+		{
+			var generos = db.Generos
+				.Include(g => g.Filhos).Include(g => g.GeneroPai)
+				.Where(g => g.GeneroPaiId == id);
+			return View(generos.ToList());
+		}
         // GET: /Genero/Details/5
         public ActionResult Details(int? id)
         {
@@ -30,7 +37,7 @@ namespace LojaDeDisco.Api.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genero genero = db.Generos.Find(id);
+            Genero genero = db.Generos.Include(g => g.GeneroPai).FirstOrDefault(g => g.Id == id);
             if (genero == null)
             {
                 return HttpNotFound();

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<LojaDeDisco.Api.Models.Genero>
+@{
+	Layout = null;
+}
+@foreach (var item in Model) {
+<div class="row">
+		<span class="col-md-3 col-sm-6">
+			@if (item.Filhos.Count > 0)
+			{
+			<span id="@(item.Id)_button" paiid="@(item.Id)" class="btn-default botao-mais"><span class="glyphicon glyphicon-plus-sign"></span>Ver subitens</span>
+			}
+		</span>
+		<span class="col-md-3 col-sm-6">@Html.DisplayFor(modelItem => item.Nome)</span>
+		<span class="col-md-2 col-sm-4">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</span>
+		<span class="col-md-2 col-sm-4">@Html.ActionLink("Details", "Details", new { id = item.Id }) </span>
+		<span class="col-md-2 col-sm-4">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
+		@if(item.Filhos.Count > 0)
+		{
+		<div id="@(item.Id)_container" class="col-md-12"></div>
+		}
+	</div>
+}
