@@ -1,0 +1,40 @@
+﻿@model IEnumerable<LojaDeDisco.Api.Models.Genero>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+	<div class="row h3">
+		<span class="col-md-3">Subgêneros</span>
+		<span class="col-md-3">@Html.DisplayNameFor(model => model.Nome)</span>
+		<span class="col-md-6">
+		</span>
+	</div>
+	<div class="row">
+@foreach (var item in Model) {
+	<div class="row">
+		<span class="col-md-3">
+			@if(item.Filhos.Count > 0)
+			{
+				<span class="btn-default"><span class="glyphicon glyphicon-plus-sign"></span>Ver subitens</span>
+			}
+		</span>
+		<span class="col-md-3">@Html.DisplayFor(modelItem => item.Nome)</span>
+		<span class="col-md-2">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</span>
+		<span class="col-md-2">@Html.ActionLink("Details", "Details", new { id = item.Id }) </span>
+		<span class="col-md-2">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
+		<div id="@(item.Id)_container" class="col-md-12"></div>
+
+	</div>
+			
+		
+		
+}
+	</div>
+</div>

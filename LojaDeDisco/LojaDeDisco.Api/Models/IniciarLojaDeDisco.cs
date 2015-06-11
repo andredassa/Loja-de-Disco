@@ -31,7 +31,8 @@ namespace LojaDeDisco.Api.Models
 			{
 				new Genero{Nome="Rock"},
 				new Genero{Nome="NoMusic"},
-				new Genero{Nome="Axé"},
+				new Genero{Nome="Forró"},
+				new Genero{Nome="Pop"},
 				new Genero{Nome="Ficção Cientifica"},
 				new Genero{Nome="Drama"},
 				new Genero{Nome="Ação"},
@@ -40,12 +41,24 @@ namespace LojaDeDisco.Api.Models
 			};
 			context.Generos.AddRange(Generos);
 			context.SaveChanges();
+			Genero rock = context.Generos.FirstOrDefault(g => g.Nome == "Rock");
+			Genero forro = context.Generos.FirstOrDefault(g => g.Nome == "Forró");
+			Genero pop = context.Generos.FirstOrDefault(g => g.Nome == "Pop");
 
 			Generos = new List<Genero>
 			{
-				new Genero{Nome="Punk Rock", GeneroPai = context.Generos.FirstOrDefault(g => g.Nome == "Rock")},
-
+				new Genero{Nome="Punk Rock", GeneroPaiId = rock.Id},
+				new Genero{Nome="Metal", GeneroPaiId = rock.Id},
+				new Genero{Nome="Forró universitário", GeneroPaiId = forro.Id},
+				new Genero{Nome = "Brit pop", GeneroPaiId = pop.Id},
+				new Genero{Nome = "Girl Pop", GeneroPaiId = pop.Id},
+				new Genero{Nome = "Divas", GeneroPaiId = pop.Id},
+				new Genero{Nome = "Coutry pop", GeneroPaiId = pop.Id},
+				new Genero{Nome = "Teen pop", GeneroPaiId = pop.Id}
 			};
+			context.Generos.AddRange(Generos);
+			context.SaveChanges();
+
 		}
 
 	}
