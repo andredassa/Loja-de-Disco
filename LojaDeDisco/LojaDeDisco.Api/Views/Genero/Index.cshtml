@@ -6,8 +6,18 @@
 <script type="text/javascript" language="javascript">
 	$(document).ready(function () {
 		$(".botao-mais").click(function () {
-			var id = $(this).attr("paiid");
-			$("#" + id + "_container").load("genero/GetFilho/" + id);
+			var id = $(this).attr("id");
+			if ($("#" + id + "_button").hasClass("glyphicon-plus-sign")) {
+				$("#" + id + "_container").load("genero/GetFilho/" + id);
+				$("#" + id + "_button")
+					.removeClass("glyphicon-plus-sign")
+					.addClass("glyphicon-minus-sign");
+			} else {
+				$("#" + id + "_container").empty();
+				$("#" + id + "_button")
+					.removeClass("glyphicon-minus-sign")
+					.addClass("glyphicon-plus-sign");
+			}
 		});
 	});
 </script>
@@ -29,8 +39,8 @@
 		<span class="col-md-3 col-sm-6">
 			@if (item.Filhos.Count > 0)
 			{
-			<span id="@(item.Id)_button" paiid="@(item.Id)" class="btn-default botao-mais">
-				<span class="glyphicon glyphicon-plus-sign"></span>Ver subitens
+			<span id="@(item.Id)" class="btn-default botao-mais">
+				<span class="glyphicon glyphicon-plus-sign" id="@(item.Id)_button"></span>Ver subitens
 			</span>
 			}
 		</span>
@@ -38,7 +48,8 @@
 		<span class="col-md-2 col-sm-4">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</span>
 		<span class="col-md-2 col-sm-4">@Html.ActionLink("Details", "Details", new { id = item.Id }) </span>
 		<span class="col-md-2 col-sm-4">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
-@if(item.Filhos.Count > 0)
+		<span class="clearfix"></span>
+			@if (item.Filhos.Count > 0)
 			{
 		<div id="@(item.Id)_container" class="col-md-12"></div>
 			}
