@@ -28,7 +28,11 @@ namespace LojaDeDisco.Api.Controllers
 			var autores = db.Autores
 				.Include(a => a.Filhos).Include(a => a.AutorPai)
 				.Where(a => a.AutorPaiId == id || (a.AutorPaiId == null && id == 0));
-			return View(autores.ToList());
+			return View(autores.OrderBy(x => x.NomeAutor).ToList());
+		}
+		private void ToList()
+		{
+			throw new NotImplementedException();
 		}
         // GET: /Autor/Details/5
         public ActionResult Details(int? id)
