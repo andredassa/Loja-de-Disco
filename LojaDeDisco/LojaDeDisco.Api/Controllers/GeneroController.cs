@@ -28,7 +28,7 @@ namespace LojaDeDisco.Api.Controllers
 			var generos = db.Generos
 				.Include(g => g.Filhos).Include(g => g.GeneroPai)
 				.Where(g => g.GeneroPaiId == id || (g.GeneroPaiId == null && id == 0));
-			return View(generos.ToList());
+			return View(generos.OrderBy(x => x.Nome).ToList());
 		}
         // GET: /Genero/Details/5
         public ActionResult Details(int? id)
