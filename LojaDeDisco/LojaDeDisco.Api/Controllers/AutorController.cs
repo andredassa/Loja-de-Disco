@@ -30,6 +30,7 @@ namespace LojaDeDisco.Api.Controllers
 				.Where(a => a.AutorPaiId == id || (a.AutorPaiId == null && id == 0));
 			return View(autores.OrderBy(x => x.NomeAutor).ToList());
 		}
+
 		private void ToList()
 		{
 			throw new NotImplementedException();
