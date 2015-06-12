@@ -14,18 +14,34 @@ namespace LojaDeDisco.Api.Models
 			{
 				new Autor{NomeAutor="Stanley Kubrick"},
 				new Autor{NomeAutor="Steven Spielberg"},
-				new Autor{NomeAutor="Black Sabath"},
+				new Autor{NomeAutor="Black Sabbath"},
 				new Autor{NomeAutor="Mc Guime"},
 				new Autor{NomeAutor="Ivete Sangalo"},
 				new Autor{NomeAutor="Quentin Tarantino"},
 				new Autor{NomeAutor="Mamonas Assassinas"},
 				new Autor{NomeAutor="Beatles"},
 				new Autor{NomeAutor="Rolling Stones"},
-				new Autor{NomeAutor="John Whu"}
+				new Autor{NomeAutor="John Woo"}
 			};
 			context.Autores.AddRange(Autores);
 			//Autores.ForEach(s => context.Autores.Add(s));
 			context.SaveChanges();
+			Autor black = context.Autores.FirstOrDefault(a => a.NomeAutor == "Black Sabbath");
+			Autor mamonas = context.Autores.FirstOrDefault(a => a.NomeAutor == "Mamonas Assassinas");
+			Autor beatles = context.Autores.FirstOrDefault(a => a.NomeAutor == "Beatles");
+			Autor rolling = context.Autores.FirstOrDefault(a => a.NomeAutor == "Rolling Stones");
+		
+			Autores = new List<Autor>
+			{
+				new Autor{NomeAutor="Ozzy Osbourne, Tony Iommi, Geezer Butler, Bill Ward", AutorPaiId = black.Id},
+				new Autor{NomeAutor="Dinho, Samuel Reis de Oliveira, Alberto Hinoto, Julio César Barbosa, Sergio Reis de Oliveira", AutorPaiId = mamonas.Id},
+				new Autor{NomeAutor="Paul McCartney, John Lennon, Ringo Starr, George Harrison, Pete Best, Stuart Sutcliffe", AutorPaiId = beatles.Id},
+				new Autor{NomeAutor="Mick Jagger, Keith Richards, Ron Wood, Charlie Watts", AutorPaiId = rolling.Id},
+
+			};
+				context.Autores.AddRange(Autores);
+				context.SaveChanges();
+			
 
 			List<Genero> Generos = new List<Genero>
 			{

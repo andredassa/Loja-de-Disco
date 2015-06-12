@@ -1,12 +1,13 @@
-﻿@model IEnumerable<LojaDeDisco.Api.Models.Genero>
+﻿@model IEnumerable<LojaDeDisco.Api.Models.Autor>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
+
 <script type="text/javascript" language="javascript">
 	function CarregarSubitens(id) {
 		if ($("#" + id + "_button").hasClass("glyphicon-plus-sign")) {
-			$("#" + id + "_container").load("/genero/GetFilho/" + id);
+			$("#" + id + "_container").load("/autor/GetFilho/" + id);
 			$("#" + id + "_button")
 				.removeClass("glyphicon-plus-sign")
 				.addClass("glyphicon-minus-sign");
@@ -20,19 +21,21 @@
 	$(document).ready(function () {
 	});
 </script>
+
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
 <div class="row">
 	<div class="row h3">
-		<span class="col-md-3 col-xs-6">Subgêneros</span>
-		<span class="col-md-3 col-xs-6">@Html.DisplayNameFor(model => model.Nome)</span>
+		<span class="col-md-3 col-xs-6">Integrantes</span>
+		<span class="col-md-3 col-xs-6">@Html.DisplayNameFor(model => model.NomeAutor)</span>
 		<span class="col-md-6 col-xs-12">
 		</span>
 	</div>
 	<div class="row">
-		@Html.Action("GetFilho", "Genero")
+		@Html.Action("GetFilho", "Autor")
 	</div>
 </div>
+

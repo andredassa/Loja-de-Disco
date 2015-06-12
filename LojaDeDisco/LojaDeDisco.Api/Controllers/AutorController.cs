@@ -10,121 +10,121 @@ using LojaDeDisco.Api.Models;
 
 namespace LojaDeDisco.Api.Controllers
 {
-    public class GeneroController : Controller
+    public class AutorController : Controller
     {
         private LojaDeDiscoContext db = new LojaDeDiscoContext();
 
-        // GET: /Genero/
+        // GET: /Autor/
         public ActionResult Index()
         {
-			var generos = db.Generos
-				.Include(g => g.Filhos).Include(g => g.GeneroPai)
-				.Where(g => g.GeneroPaiId == null);
-            return View(generos.ToList());
+            var autores = db.Autores
+				.Include(a => a.Filhos).Include(a => a.AutorPai)
+				.Where(a => a.AutorPaiId == null);
+			return View(autores.ToList());
         }
 
 		public ActionResult GetFilho(int id = 0)
 		{
-			var generos = db.Generos
-				.Include(g => g.Filhos).Include(g => g.GeneroPai)
-				.Where(g => g.GeneroPaiId == id || (g.GeneroPaiId == null && id == 0));
-			return View(generos.ToList());
+			var autores = db.Autores
+				.Include(a => a.Filhos).Include(a => a.AutorPai)
+				.Where(a => a.AutorPaiId == id || (a.AutorPaiId == null && id == 0));
+			return View(autores.ToList());
 		}
-        // GET: /Genero/Details/5
+        // GET: /Autor/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genero genero = db.Generos.Include(g => g.GeneroPai).FirstOrDefault(g => g.Id == id);
-            if (genero == null)
+            Autor autor = db.Autores.Include(a => a.AutorPai).FirstOrDefault(a => a.Id == id);
+            if (autor == null)
             {
                 return HttpNotFound();
             }
-            return View(genero);
+            return View(autor);
         }
 
-        // GET: /Genero/Create
+        // GET: /Autor/Create
         public ActionResult Create()
         {
-            ViewBag.GeneroPaiId = new SelectList(db.Generos, "Id", "Nome");
+            ViewBag.AutorPaiId = new SelectList(db.Autores, "Id", "NomeAutor");
             return View();
         }
 
-        // POST: /Genero/Create
+        // POST: /Autor/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nome,GeneroPaiId")] Genero genero)
+        public ActionResult Create([Bind(Include="Id,NomeAutor,AutorPaiId")] Autor autor)
         {
             if (ModelState.IsValid)
             {
-                db.Generos.Add(genero);
+                db.Autores.Add(autor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GeneroPaiId = new SelectList(db.Generos, "Id", "Nome", genero.GeneroPaiId);
-            return View(genero);
+            ViewBag.AutorPaiId = new SelectList(db.Autores, "Id", "NomeAutor", autor.AutorPaiId);
+            return View(autor);
         }
 
-        // GET: /Genero/Edit/5
+        // GET: /Autor/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genero genero = db.Generos.Find(id);
-            if (genero == null)
+            Autor autor = db.Autores.Find(id);
+            if (autor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.GeneroPaiId = new SelectList(db.Generos, "Id", "Nome", genero.GeneroPaiId);
-            return View(genero);
+            ViewBag.AutorPaiId = new SelectList(db.Autores, "Id", "NomeAutor", autor.AutorPaiId);
+            return View(autor);
         }
 
-        // POST: /Genero/Edit/5
+        // POST: /Autor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nome,GeneroPaiId")] Genero genero)
+        public ActionResult Edit([Bind(Include="Id,NomeAutor,AutorPaiId")] Autor autor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(genero).State = EntityState.Modified;
+                db.Entry(autor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GeneroPaiId = new SelectList(db.Generos, "Id", "Nome", genero.GeneroPaiId);
-            return View(genero);
+            ViewBag.AutorPaiId = new SelectList(db.Autores, "Id", "NomeAutor", autor.AutorPaiId);
+            return View(autor);
         }
 
-        // GET: /Genero/Delete/5
+        // GET: /Autor/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Genero genero = db.Generos.Find(id);
-            if (genero == null)
+            Autor autor = db.Autores.Find(id);
+            if (autor == null)
             {
                 return HttpNotFound();
             }
-            return View(genero);
+            return View(autor);
         }
 
-        // POST: /Genero/Delete/5
+        // POST: /Autor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Genero genero = db.Generos.Find(id);
-            db.Generos.Remove(genero);
+            Autor autor = db.Autores.Find(id);
+            db.Autores.Remove(autor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
